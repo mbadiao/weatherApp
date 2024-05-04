@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  color: white;
+}
+
+.container {
+  height: max-content;
+  width: 35vw;
+  padding: 6%;
+  background-color: #ee6c4d;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+.input {
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding-block: 0.7em;
+  color: white;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+}
+
+.input-border {
+  position: absolute;
+  background: var(--border-after-color);
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: white;
+}
+
+.input:focus + .input-border {
+  width: 100%;
+}
+
+.form-control {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f38d68;
+  padding: 4%;
+  --width-of-input: 300px;
+}
+
+.input-alt {
+  font-size: 1.2rem;
+  padding-block: 0.8em;
+}
+
+.input-border-alt {
+  height: 3px;
+  background: linear-gradient(90deg, #ff6464 0%, #ffbf59 50%, #47c9ff 100%);
+  transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.input-alt:focus + .input-border-alt {
+  width: 100%;
+}
+
+.submit {
+  cursor: pointer;
+}
+
+.display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fresh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.neuton-light {
+  font-family: "Neuton", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2rem;
+}
+
+.neuton-regular {
+  font-family: "Neuton", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+}
+
+.neuton-bold {
+  font-family: "Neuton", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 4rem;
+}
+.humidity,
+.wind {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem;
+  width: 16dvw;
+}
+.freshimg{
+    width: 25%;
+}
+
+.infocontainer{
+margin-left: 5%;
+}
