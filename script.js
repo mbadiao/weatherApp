@@ -1,24 +1,20 @@
-const getData = async (country) => {
-  const url = `https://open-weather13.p.rapidapi.com/city/${country}/FR`;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "169271ca4fmshfa9a8e317e276bfp1aa705jsn7e23adf443a7",
-      "X-RapidAPI-Host": "open-weather13.p.rapidapi.com",
-    },
-  };
-  try {
-    const response = await fetch(url, options);
-    if (response.ok) {
-      const result = await response.json();
-      return result;
-    }
-    throw new Error(response.status, response.text);
-  } catch (error) {
-    console.error(error);
-  }
-};
+async function fetchWeather(city) {
+//   const apiKey = "17ed2db35533377d79567eb13b85103a";
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=731d722eeebd61b0a753eee7de95aaf1`;
 
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    // Handle errors gracefully, like displaying an error message to the user
+    return null;
+  }
+}
 const getImageTime = (time) => {
   switch (time) {
     case "Clear":
@@ -45,7 +41,7 @@ const submit = document.querySelector(".submit");
 submit.addEventListener("click", async (e) => {
   e.preventDefault();
   const countryName = document.querySelector(".input");
-  const result = await getData(countryName.value);
+  const result = await fetchWeather(countryName.value);
   console.log(result.cod);
   if (countryName.value.trim() !== "" && result.cod !== 404) {
     const { main, name, sys, wind, weather } = result;
