@@ -1,6 +1,6 @@
 async function fetchWeather(city) {
-//   const apiKey = "17ed2db35533377d79567eb13b85103a";
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=731d722eeebd61b0a753eee7de95aaf1`;
+  const apiKey = "17ed2db35533377d79567eb13b85103a";
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=metric`;
 
   try {
     const response = await fetch(url);
@@ -11,7 +11,6 @@ async function fetchWeather(city) {
     return data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
-    // Handle errors gracefully, like displaying an error message to the user
     return null;
   }
 }
@@ -42,8 +41,7 @@ submit.addEventListener("click", async (e) => {
   e.preventDefault();
   const countryName = document.querySelector(".input");
   const result = await fetchWeather(countryName.value);
-  console.log(result.cod);
-  if (countryName.value.trim() !== "" && result.cod !== 404) {
+  if (countryName.value.trim() !== "" && result !== null) {
     const { main, name, sys, wind, weather } = result;
     const imageTMPL = getImageTime(weather[0].main);
     document.querySelector(".img").innerHTML = imageTMPL;
@@ -54,9 +52,8 @@ submit.addEventListener("click", async (e) => {
     ).innerHTML = `<img class='freshimg' src="images/humidity.png" alt=""></img> <div class='infocontainer'> <div> ${main.humidity} % </div> <div>Humidity</div></div> `;
     document.querySelector(
       ".wind"
-    ).innerHTML = `<img class='freshimg' src="images/wind.png" alt=""></img> <div class='infocontainer'> <div> ${wind.speed} km/h </div> <div>Wind Speed</div></div> `;
+    ).innerHTML = `<img class='freshimg' src="images/wind.png" alt=""></img> <div class='infocontainer'> <div> ${wind.speed} m/s </div> <div>Wind Speed</div></div> `;
   } else {
-    console.log("ici");
     document.querySelector(".error").innerHTML = "Oupss try again";
   }
 });
